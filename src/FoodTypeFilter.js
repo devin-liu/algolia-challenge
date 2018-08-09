@@ -1,10 +1,10 @@
 import React from 'react';
 
-const FoodTypeFilter = ({ filter, number }) => {
+const FoodTypeFilter = ({ filter, number, onClick }) => {
   return (
-    <div>
+    <a style={{ display: 'block' }} onClick={() => onClick(filter)}>
       {filter} ({number})
-    </div>
+    </a>
   )
 }
 

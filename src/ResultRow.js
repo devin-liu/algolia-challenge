@@ -1,4 +1,40 @@
 import React from 'react';
+import stars from './stars-icons.png';
+
+const yellowStarWidth = num => num*36.8
+const greyStarWidth = num => (5-num)*36.8
+
+
+const starStyle = {
+  height: '35px',
+  position: 'absolute'
+}
+
+const yellowStarStyle = num => {
+  return {
+    background: `url(${process.env.PUBLIC_URL}'/stars-icons.png') 0 35px`,
+    width: `${yellowStarWidth(num)}px`,
+    height: '35px',
+    position: 'absolute'
+  }
+}
+
+const greyStarStyle = num => {
+  return {
+    background: `url(${process.env.PUBLIC_URL}'/stars-icons.png') 0 0`,
+    width: '184px',
+    height: '35px',
+    position: 'absolute'
+  }
+}
+
+const starContainerStyle = {
+  height: '35px',
+  width: '184px',
+  position: 'relative',
+  display: 'inline-block',
+  verticalAlign: 'middle'
+}
 
 const ResultRow = ({ result }) => {
   return (
@@ -7,17 +43,21 @@ const ResultRow = ({ result }) => {
         <img className="rounded" src={result.image_url} height="auto" width="150" />
       </div>
       <div className="col-9">
-
-        <div style={{height:"calc(90% / 3)"}} className="h5"><strong>{result.name}</strong></div>
-        <div style={{height:"calc(90% / 3)"}} className="">
-          <span className="text-warning">
-            {result.stars_count}
-          </span>
-          <span className="text-secondary">
+        <div className="h5"><strong>{result.name}</strong></div>
+        <div className="h5">
+          <div style={starContainerStyle}>
+            <div style={greyStarStyle(result.stars_count)} />
+            <div style={yellowStarStyle(result.stars_count)}/>
+          </div>
+          <div className="text-secondary h4" style={{display: 'inline-block'}}>
             &nbsp;({result.reviews_count} reviews)
-          </span>
+          </div>
         </div>
-        <div style={{height:"calc(90% / 3)"}} className="text-secondary">{result.food_type} | {result.neighborhood} | {result.price_range}</div>
+        <div style={{height:"calc(90% / 3)"}} className="text-secondary">
+          <p>
+          {result.food_type} | {result.neighborhood} | {result.price_range}
+          </p>
+        </div>
       </div>
 
     </div>

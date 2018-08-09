@@ -28,6 +28,19 @@ const getFoodTypesFromFacets = (facets) => {
   return facets.filter(facet => facet.name === 'food_type')[0].data
 }
 
+
+const getFoodTypesFromHits = (hits) => {
+  const types = {}
+  hits.map(hit => {
+    if(types[hit.food_type]){
+      types[hit.food_type] += 1
+    }else{
+      types[hit.food_type] = 1
+    }
+  })
+  return types
+}
+
 class App extends Component {
   constructor(props){
     super(props)
@@ -39,9 +52,10 @@ class App extends Component {
   }
   componentDidMount() {
     helper.on('result', (data) => {
+      data.getFacetValues('food_type')
       const { hits, query, facets } = data;
       cachedResults[query] = data;
-      const filters = getFoodTypesFromFacets(facets)
+      const filters = getFoodTypesFromHits(hits)
       this.setState({
         hits: hits,
         filters,
@@ -63,22 +77,44 @@ class App extends Component {
     if(cachedResults[searchInput]){
       this.setState({
         hits: cachedResults[searchInput].hits,
-        filters: getFoodTypesFromFacets(cachedResults[searchInput].facets)
+        filters: getFoodTypesFromHits(cachedResults[searchInput].hits)
       })
     }else{
       console.log(`fetching: ${this.state.searchInput}`)
+      const facetFilters = this.state.filter && this.state.filter.length > 0 ? [[`food_type:${this.state.filter}`]] : false
       helper
-      .setQuery(searchInput)
+      .setQuery(searchInput, { facetFilters })
       .search()
     }
-
   }
+
+
+  setFilter = (filter) => {
+    if(filter === this.state.filter){
+      this.setState({ filter: false})
+    }else{
+      this.setState({ filter })
+      this.fetchResults();
+    }
+  }
+
 
   getResultText = () => {
     if(!this.state.hits.length || !this.state.searchInput) return false
     const searchInput = this.state.searchInput;
     return (<Fragment><strong>{this.state.hits.length} results found </strong> in {this.state.results.processingTimeMS / 1000} seconds</Fragment>)
   }
+
+
+  getFilteredResults = () => {
+    const { filter, hits } = this.state
+    if(filter && filter.length > 0){
+      return hits.filter(hit => hit.food_type === filter)
+    }else{
+      return hits
+    }
+  }
+
   render() {
 
     return (
@@ -92,6 +128,7 @@ class App extends Component {
                 return (<FoodTypeFilter
                   key={`filter-${filter}`}
                   filter={filter}
+                  onClick={this.setFilter}
                   number={number} />)
               })
             }
@@ -100,7 +137,7 @@ class App extends Component {
               <div className="p-3">
                 {this.getResultText()}
               </div>
-              {this.state.hits.map(result => <ResultRow key={`${result.objectID}`} result={result}/>)}
+              {this.getFilteredResults().map(result => <ResultRow key={`${result.objectID}`} result={result}/>)}
             </main>
           </div>
         </div>
