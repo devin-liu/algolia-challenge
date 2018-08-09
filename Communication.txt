@@ -1,0 +1,54 @@
+Question1
+
+Hi George,
+
+What is a Record?
+
+Imagine if a customer comes in and makes a purchase. That customer leaves you with a first name, last name, phone number, and address. A record is a copy of that information.
+
+What is an Index?
+
+Imagine if you had a line of one hundred people. We want to find one person in this line. All we have is their phone number. We would have to ask them one by one to find that person. Now imagine if we sorted them by alphabetical order. It would be much easier to find that person. That is what indexing will do to your database— make it easier to find what you are looking for based on one characteristic.
+
+
+I'm also struggling with understanding what types of metrics would be useful to include in the "Custom Ranking."
+
+Imagine you have a highly fashionable clothing store. You know what is new / trending, and have list of scores for every item you sell. That is a unique value that only your business knows. Adding that kind of information will help promote items that have a higher chance of delivering customer satisfaction
+
+
+Take care,
+Devin Liu
+
+
+Question 2
+
+Sorry to give you the kind of feedback that I know you do not want to hear, but I really hate the new dashboard design. Clearing and deleting indexes are now several clicks away. I am needing to use these features while iterating, so this is inconvenient.
+
+Hi Matt,
+
+I appreciate your product feedback. I am sorry that the new design is adding friction for you. I completely agree that you should be able to iterate quickly. I will coordinate with our team to improve this design.
+
+
+Take care,
+Devin Liu
+
+
+Question 3
+
+I'm looking to integrate Algolia in my website. Will this be a lot of development work for me? What's the high level process look like?
+
+Hi Leo,
+
+Getting started with Algolia should only take a few minutes. Our API is very customizable so you can tailor your search page for maximizing customer satisfaction. I recommend starting by registering for an account so that you can receive your Application ID and API Key.
+
+Our search library is available on many platforms and languages. I recommend installing ready-made server-side and client-side packages.
+
+On the server-side can create an index on your database for more efficient search. You can also add custom fields, and specify which fields are searchable.
+
+On the client-side we have an instant-search page with HTML and JS ready for installation. Once you have added those pages,  add the appId and apiKey to the app.js file. Now you can try out for yourself what the demo will look like.
+
+
+
+Take care,
+Devin Liu
+
