@@ -1,5 +1,5 @@
 import React from 'react';
-import stars from './stars-icons.png';
+import starsIcons from './stars-icons.png';
 
 const yellowStarWidth = num => num*36.8
 const greyStarWidth = num => (5-num)*36.8
@@ -12,7 +12,7 @@ const starStyle = {
 
 const yellowStarStyle = num => {
   return {
-    background: `url(${process.env.PUBLIC_URL}'/stars-icons.png') 0 35px`,
+    background: `url('${starsIcons}') 0 35px`,
     width: `${yellowStarWidth(num)}px`,
     height: '35px',
     position: 'absolute'
@@ -21,7 +21,7 @@ const yellowStarStyle = num => {
 
 const greyStarStyle = num => {
   return {
-    background: `url(${process.env.PUBLIC_URL}'/stars-icons.png') 0 0`,
+    background: `image(${starsIcons}) 0 0`,
     width: '184px',
     height: '35px',
     position: 'absolute'
@@ -38,7 +38,7 @@ const starContainerStyle = {
 
 const ResultRow = ({ result }) => {
   return (
-    <div className="row row-eq-height p-3 text-left">
+    <div className="row row-eq-height p-3 mb-3 text-left" style={{background: 'white'}}>
       <div className="col-3">
         <img className="rounded" src={result.image_url} height="auto" width="150" />
       </div>
