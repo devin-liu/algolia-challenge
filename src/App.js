@@ -128,6 +128,7 @@ class App extends Component {
                 return (<FoodTypeFilter
                   key={`filter-${filter}`}
                   filter={filter}
+                  highlighted={this.state.filter && this.state.filter === filter}
                   onClick={this.setFilter}
                   number={number} />)
               })
